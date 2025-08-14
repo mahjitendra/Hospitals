@@ -1,0 +1,33 @@
+# Composer dependencies
+/vendor/
+
+# Environment file
+.env
+
+# Storage files
+/storage/logs/*.log
+/storage/cache/sessions/
+/storage/cache/views/
+/storage/cache/api/
+/storage/cache/routes/
+/storage/cache/config/
+/storage/cache/reports/
+/storage/framework/
+
+# Node dependencies
+/node_modules/
+
+# Uploads - Depending on strategy, you might want to version control some of these
+# but typically not user-generated content.
+/public/assets/uploads/
+/storage/uploads/
+
+# IDE helper files
+.idea/
+.vscode/
+.phpstorm.meta.php
+_ide_helper.php
+.DS_Store
+
+# Temporary files
+/storage/temp/
