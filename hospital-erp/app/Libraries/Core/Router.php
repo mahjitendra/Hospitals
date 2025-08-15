@@ -45,19 +45,43 @@ class Router
         $path = $this->request->getPath();
         $method = $this->request->getMethod();
 
-        if (isset($this->routes[$method][$path])) {
-            $callback = $this->routes[$method][$path];
+        foreach ($this->routes[$method] ?? [] as $route => $details) {
+            // Convert route with placeholders like {id} to a regex pattern
+            $pattern = preg_replace('/\{([a-zA-Z0-9_]+)\}/', '([a-zA-Z0-9_]+)', $route);
+            $pattern = "#^" . $pattern . "$#";
 
-            if (is_array($callback) && count($callback) === 2) {
-                [$controller, $action] = $callback;
+            if (preg_match($pattern, $path, $matches)) {
+                // Remove the full matched string
+                array_shift($matches);
+                $params = $matches;
 
-                if (class_exists($controller)) {
-                    $controllerInstance = new $controller();
+                // Handle middleware
+                if (isset($details['middleware']) && is_array($details['middleware'])) {
+                    foreach ($details['middleware'] as $middlewareClass) {
+                        if (class_exists($middlewareClass)) {
+                            $middlewareInstance = new $middlewareClass();
+                            $middlewareInstance->handle();
+                        } else {
+                            throw new \Exception("Middleware class not found: {$middlewareClass}");
+                        }
+                    }
+                }
 
-                    if (method_exists($controllerInstance, $action)) {
-                        // Call the controller action
-                        call_user_func_array([$controllerInstance, $action], []);
-                        return;
+                // Handle the controller action
+                $callback = $details['callback'] ?? null;
+                if (is_array($callback) && count($callback) === 2) {
+                    [$controller, $action] = $callback;
+
+                    if (class_exists($controller)) {
+                        $controllerInstance = new $controller();
+                        if (method_exists($controllerInstance, $action)) {
+                            call_user_func_array([$controllerInstance, $action], $params);
+                            return;
+                        } else {
+                            throw new \Exception("Action not found: {$controller}::{$action}");
+                        }
+                    } else {
+                        throw new \Exception("Controller class not found: {$controller}");
                     }
                 }
             }

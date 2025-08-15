@@ -1,0 +1,40 @@
+<h2>Order Lab Test for <?= htmlspecialchars($patient['first_name'] . ' ' . $patient['last_name']) ?></h2>
+<hr>
+
+<?php if (isset($error)): ?>
+    <div class="alert alert-danger" role="alert">
+        <?= htmlspecialchars($error) ?>
+    </div>
+<?php endif; ?>
+
+<form action="/patients/<?= $patient['id'] ?>/lab/order" method="POST">
+    <div class="form-group">
+        <label for="lab_test_id"><strong>Select Test</strong></label>
+        <select id="lab_test_id" name="lab_test_id" class="form-control" required>
+            <option value="">Choose a test...</option>
+            <?php if (!empty($availableTests)): ?>
+                <?php foreach ($availableTests as $test): ?>
+                    <option value="<?= $test['id'] ?>"><?= htmlspecialchars($test['name']) ?> (<?= htmlspecialchars($test['department']) ?>)</option>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="notes"><strong>Clinical Notes / Reason for Test</strong></label>
+        <textarea id="notes" name="notes" class="form-control" rows="4"></textarea>
+    </div>
+    <div class="mt-3">
+        <button type="submit" class="btn btn-primary">Submit Order</button>
+        <a href="/patients/view/<?= $patient['id'] ?>" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
+
+<style>
+    .form-group { margin-bottom: 1rem; }
+    .form-control { width: 100%; padding: .5rem .75rem; border: 1px solid #ced4da; border-radius: .25rem; box-sizing: border-box; }
+    .btn { text-decoration: none; display: inline-block; padding: .5rem 1rem; border-radius: .25rem; cursor: pointer; }
+    .btn-primary { background-color: #007bff; color: #fff; border: none; }
+    .btn-secondary { background-color: #6c757d; color: #fff; border: none; }
+    .mt-3 { margin-top: 1.5rem; }
+    .alert-danger { background-color: #f8d7da; color: #721c24; padding: .75rem 1.25rem; border-radius: .25rem; }
+</style>

@@ -1,0 +1,22 @@
+CREATE TABLE IF NOT EXISTS `patients` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id` INT UNSIGNED NULL,
+  `first_name` VARCHAR(255) NOT NULL,
+  `last_name` VARCHAR(255) NOT NULL,
+  `date_of_birth` DATE NOT NULL,
+  `gender` ENUM('Male', 'Female', 'Other') NOT NULL,
+  `address` VARCHAR(255) NULL,
+  `city` VARCHAR(100) NULL,
+  `state` VARCHAR(100) NULL,
+  `zip_code` VARCHAR(20) NULL,
+  `phone_number` VARCHAR(50) NULL,
+  `email` VARCHAR(255) NULL,
+  `emergency_contact_name` VARCHAR(255) NULL,
+  `emergency_contact_phone` VARCHAR(50) NULL,
+  `blood_type` VARCHAR(10) NULL,
+  `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `patients_email_unique` (`email`),
+  FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
