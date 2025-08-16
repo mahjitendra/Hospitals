@@ -150,6 +150,24 @@ return [
             'callback' => ['App\Controllers\Quality\IncidentController', 'showCreateForm'],
             'middleware' => [\App\Middleware\AuthMiddleware::class]
         ],
+
+        // Reports Routes
+        '/reports' => [
+            'callback' => ['App\Controllers\Reports\ReportController', 'index'],
+            'middleware' => [\App\Middleware\AuthMiddleware::class]
+        ],
+        '/reports/analytics/patient-demographics' => [
+            'callback' => ['App\Controllers\Reports\AnalyticsController', 'viewPatientDemographics'],
+            'middleware' => [\App\Middleware\AuthMiddleware::class]
+        ],
+        '/reports/analytics/financial-summary' => [
+            'callback' => ['App\Controllers\Reports\AnalyticsController', 'viewFinancialSummary'],
+            'middleware' => [\App\Middleware\AuthMiddleware::class]
+        ],
+        '/reports/analytics/inventory-status' => [
+            'callback' => ['App\Controllers\Reports\AnalyticsController', 'viewInventoryStatus'],
+            'middleware' => [\App\Middleware\AuthMiddleware::class]
+        ],
     ],
     'POST' => [
         // Authentication Routes
