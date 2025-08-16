@@ -96,6 +96,28 @@ return [
             'callback' => ['App\Controllers\Financial\PaymentController', 'showPaymentForm'],
             'middleware' => [\App\Middleware\AuthMiddleware::class]
         ],
+
+        // HR Routes
+        '/hr/staff' => [
+            'callback' => ['App\Controllers\HumanResource\StaffController', 'index'],
+            'middleware' => [\App\Middleware\AuthMiddleware::class]
+        ],
+        '/hr/staff/view/{id}' => [
+            'callback' => ['App\Controllers\HumanResource\StaffController', 'view'],
+            'middleware' => [\App\Middleware\AuthMiddleware::class]
+        ],
+        '/hr/staff/create' => [
+            'callback' => ['App\Controllers\HumanResource\StaffController', 'showCreateForm'],
+            'middleware' => [\App\Middleware\AuthMiddleware::class]
+        ],
+        '/hr/staff/{id}/schedules' => [
+            'callback' => ['App\Controllers\HumanResource\ScheduleController', 'listByStaff'],
+            'middleware' => [\App\Middleware\AuthMiddleware::class]
+        ],
+        '/hr/staff/{id}/schedules/create' => [
+            'callback' => ['App\Controllers\HumanResource\ScheduleController', 'showCreateForm'],
+            'middleware' => [\App\Middleware\AuthMiddleware::class]
+        ],
     ],
     'POST' => [
         // Authentication Routes
@@ -128,6 +150,14 @@ return [
         ],
         '/invoices/{id}/pay' => [
             'callback' => ['App\Controllers\Financial\PaymentController', 'create'],
+            'middleware' => [\App\Middleware\AuthMiddleware::class]
+        ],
+        '/hr/staff/create' => [
+            'callback' => ['App\Controllers\HumanResource\StaffController', 'create'],
+            'middleware' => [\App\Middleware\AuthMiddleware::class]
+        ],
+        '/hr/staff/{id}/schedules/create' => [
+            'callback' => ['App\Controllers\HumanResource\ScheduleController', 'create'],
             'middleware' => [\App\Middleware\AuthMiddleware::class]
         ],
         '/login' => [
