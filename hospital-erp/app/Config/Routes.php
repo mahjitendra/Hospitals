@@ -136,6 +136,20 @@ return [
             'callback' => ['App\Controllers\Inventory\VendorController', 'showCreateForm'],
             'middleware' => [\App\Middleware\AuthMiddleware::class]
         ],
+
+        // Quality Routes
+        '/quality' => [
+            'callback' => ['App\Controllers\Quality\QualityController', 'index'],
+            'middleware' => [\App\Middleware\AuthMiddleware::class]
+        ],
+        '/quality/incidents' => [
+            'callback' => ['App\Controllers\Quality\IncidentController', 'index'],
+            'middleware' => [\App\Middleware\AuthMiddleware::class]
+        ],
+        '/quality/incidents/create' => [
+            'callback' => ['App\Controllers\Quality\IncidentController', 'showCreateForm'],
+            'middleware' => [\App\Middleware\AuthMiddleware::class]
+        ],
     ],
     'POST' => [
         // Authentication Routes
@@ -184,6 +198,10 @@ return [
         ],
         '/inventory/vendors/create' => [
             'callback' => ['App\Controllers\Inventory\VendorController', 'create'],
+            'middleware' => [\App\Middleware\AuthMiddleware::class]
+        ],
+        '/quality/incidents/create' => [
+            'callback' => ['App\Controllers\Quality\IncidentController', 'create'],
             'middleware' => [\App\Middleware\AuthMiddleware::class]
         ],
         '/login' => [
