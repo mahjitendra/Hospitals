@@ -68,4 +68,15 @@ class User
             return false;
         }
     }
+
+    /**
+     * Retrieves all users from the database.
+     *
+     * @return array A list of all users.
+     */
+    public function findAll(): array
+    {
+        $stmt = $this->db->query("SELECT id, name, email FROM users ORDER BY name");
+        return $stmt->fetchAll();
+    }
 }

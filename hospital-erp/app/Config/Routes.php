@@ -168,6 +168,20 @@ return [
             'callback' => ['App\Controllers\Reports\AnalyticsController', 'viewInventoryStatus'],
             'middleware' => [\App\Middleware\AuthMiddleware::class]
         ],
+
+        // Admin Routes
+        '/admin' => [
+            'callback' => ['App\Controllers\Admin\AdminController', 'index'],
+            'middleware' => [\App\Middleware\AuthMiddleware::class] // Should add AdminMiddleware later
+        ],
+        '/admin/users' => [
+            'callback' => ['App\Controllers\Admin\UserController', 'index'],
+            'middleware' => [\App\Middleware\AuthMiddleware::class]
+        ],
+        '/admin/roles' => [
+            'callback' => ['App\Controllers\Admin\RoleController', 'index'],
+            'middleware' => [\App\Middleware\AuthMiddleware::class]
+        ],
     ],
     'POST' => [
         // Authentication Routes
