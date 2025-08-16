@@ -118,6 +118,24 @@ return [
             'callback' => ['App\Controllers\HumanResource\ScheduleController', 'showCreateForm'],
             'middleware' => [\App\Middleware\AuthMiddleware::class]
         ],
+
+        // Inventory Routes
+        '/inventory/items' => [
+            'callback' => ['App\Controllers\Inventory\InventoryController', 'index'],
+            'middleware' => [\App\Middleware\AuthMiddleware::class]
+        ],
+        '/inventory/items/create' => [
+            'callback' => ['App\Controllers\Inventory\InventoryController', 'showCreateForm'],
+            'middleware' => [\App\Middleware\AuthMiddleware::class]
+        ],
+        '/inventory/vendors' => [
+            'callback' => ['App\Controllers\Inventory\VendorController', 'index'],
+            'middleware' => [\App\Middleware\AuthMiddleware::class]
+        ],
+        '/inventory/vendors/create' => [
+            'callback' => ['App\Controllers\Inventory\VendorController', 'showCreateForm'],
+            'middleware' => [\App\Middleware\AuthMiddleware::class]
+        ],
     ],
     'POST' => [
         // Authentication Routes
@@ -158,6 +176,14 @@ return [
         ],
         '/hr/staff/{id}/schedules/create' => [
             'callback' => ['App\Controllers\HumanResource\ScheduleController', 'create'],
+            'middleware' => [\App\Middleware\AuthMiddleware::class]
+        ],
+        '/inventory/items/create' => [
+            'callback' => ['App\Controllers\Inventory\InventoryController', 'create'],
+            'middleware' => [\App\Middleware\AuthMiddleware::class]
+        ],
+        '/inventory/vendors/create' => [
+            'callback' => ['App\Controllers\Inventory\VendorController', 'create'],
             'middleware' => [\App\Middleware\AuthMiddleware::class]
         ],
         '/login' => [
