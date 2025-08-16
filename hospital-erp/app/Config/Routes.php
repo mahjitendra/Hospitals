@@ -78,6 +78,24 @@ return [
             'callback' => ['App\Controllers\Laboratory\TestOrderController', 'showOrderForm'],
             'middleware' => [\App\Middleware\AuthMiddleware::class]
         ],
+
+        // Financial Routes
+        '/patients/{id}/invoices' => [
+            'callback' => ['App\Controllers\Financial\InvoiceController', 'listByPatient'],
+            'middleware' => [\App\Middleware\AuthMiddleware::class]
+        ],
+        '/invoices/view/{id}' => [
+            'callback' => ['App\Controllers\Financial\InvoiceController', 'view'],
+            'middleware' => [\App\Middleware\AuthMiddleware::class]
+        ],
+        '/patients/{id}/invoices/create' => [
+            'callback' => ['App\Controllers\Financial\InvoiceController', 'showCreateForm'],
+            'middleware' => [\App\Middleware\AuthMiddleware::class]
+        ],
+        '/invoices/{id}/pay' => [
+            'callback' => ['App\Controllers\Financial\PaymentController', 'showPaymentForm'],
+            'middleware' => [\App\Middleware\AuthMiddleware::class]
+        ],
     ],
     'POST' => [
         // Authentication Routes
@@ -102,6 +120,14 @@ return [
         ],
         '/patients/{id}/lab/order' => [
             'callback' => ['App\Controllers\Laboratory\TestOrderController', 'createOrder'],
+            'middleware' => [\App\Middleware\AuthMiddleware::class]
+        ],
+        '/patients/{id}/invoices/create' => [
+            'callback' => ['App\Controllers\Financial\InvoiceController', 'create'],
+            'middleware' => [\App\Middleware\AuthMiddleware::class]
+        ],
+        '/invoices/{id}/pay' => [
+            'callback' => ['App\Controllers\Financial\PaymentController', 'create'],
             'middleware' => [\App\Middleware\AuthMiddleware::class]
         ],
         '/login' => [
