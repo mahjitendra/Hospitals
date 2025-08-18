@@ -182,6 +182,15 @@ return [
             'callback' => ['App\Controllers\Admin\RoleController', 'index'],
             'middleware' => [\App\Middleware\AuthMiddleware::class]
         ],
+
+        // Integration Routes
+        '/integration/datamappings' => [
+            'callback' => ['App\Controllers\Integration\DataExchangeController', 'index'],
+            'middleware' => [\App\Middleware\AuthMiddleware::class]
+        ],
+        '/api/{endpoint}' => [
+            'callback' => ['App\Controllers\Integration\APIController', 'handleRequest']
+        ],
     ],
     'POST' => [
         // Authentication Routes
@@ -235,6 +244,9 @@ return [
         '/quality/incidents/create' => [
             'callback' => ['App\Controllers\Quality\IncidentController', 'create'],
             'middleware' => [\App\Middleware\AuthMiddleware::class]
+        ],
+        '/api/{endpoint}' => [
+            'callback' => ['App\Controllers\Integration\APIController', 'handleRequest']
         ],
         '/login' => [
             'callback' => ['App\Controllers\AuthController', 'login']
