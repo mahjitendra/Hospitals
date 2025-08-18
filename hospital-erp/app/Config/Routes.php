@@ -191,6 +191,12 @@ return [
         '/api/{endpoint}' => [
             'callback' => ['App\Controllers\Integration\APIController', 'handleRequest']
         ],
+        '/mobile/login' => [
+            'callback' => ['App\Controllers\Mobile\MobileAuthController', 'login']
+        ],
+        '/mobile/api/{endpoint}' => [
+            'callback' => ['App\Controllers\Mobile\MobileAPIController', 'handleRequest']
+        ],
     ],
     'POST' => [
         // Authentication Routes
