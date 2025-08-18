@@ -1,0 +1,13 @@
+CREATE TABLE IF NOT EXISTS `clinical_notes` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `patient_id` INT UNSIGNED NOT NULL,
+  `doctor_id` INT UNSIGNED NOT NULL,
+  `note_date` DATETIME NOT NULL,
+  `note_type` VARCHAR(100) NOT NULL COMMENT 'e.g., SOAP, Progress, Consultation',
+  `note` TEXT NOT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`patient_id`) REFERENCES `patients`(`id`) ON DELETE CASCADE,
+  FOREIGN KEY (`doctor_id`) REFERENCES `users`(`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

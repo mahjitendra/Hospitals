@@ -197,6 +197,20 @@ return [
         '/mobile/api/{endpoint}' => [
             'callback' => ['App\Controllers\Mobile\MobileAPIController', 'handleRequest']
         ],
+
+        // Clinical Routes
+        '/clinical' => [
+            'callback' => ['App\Controllers\Clinical\EMRController', 'index'],
+            'middleware' => [\App\Middleware\AuthMiddleware::class]
+        ],
+        '/patients/{id}/notes/create' => [
+            'callback' => ['App\Controllers\Clinical\ClinicalNotesController', 'showCreateForm'],
+            'middleware' => [\App\Middleware\AuthMiddleware::class]
+        ],
+        '/patients/{id}/diagnoses/create' => [
+            'callback' => ['App\Controllers\Clinical\DiagnosisController', 'showCreateForm'],
+            'middleware' => [\App\Middleware\AuthMiddleware::class]
+        ],
     ],
     'POST' => [
         // Authentication Routes
@@ -253,6 +267,14 @@ return [
         ],
         '/api/{endpoint}' => [
             'callback' => ['App\Controllers\Integration\APIController', 'handleRequest']
+        ],
+        '/patients/{id}/notes/create' => [
+            'callback' => ['App\Controllers\Clinical\ClinicalNotesController', 'create'],
+            'middleware' => [\App\Middleware\AuthMiddleware::class]
+        ],
+        '/patients/{id}/diagnoses/create' => [
+            'callback' => ['App\Controllers\Clinical\DiagnosisController', 'create'],
+            'middleware' => [\App\Middleware\AuthMiddleware::class]
         ],
         '/login' => [
             'callback' => ['App\Controllers\AuthController', 'login']
