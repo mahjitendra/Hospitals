@@ -1,0 +1,105 @@
+{
+    "name": "college-erp/college-erp",
+    "description": "A comprehensive College ERP system built with PHP",
+    "type": "project",
+    "keywords": ["college", "erp", "education", "management", "php"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "College ERP Team",
+            "email": "info@college-erp.com"
+        }
+    ],
+    "require": {
+        "php": "^7.4|^8.0",
+        "ext-pdo": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "ext-openssl": "*",
+        "ext-curl": "*",
+        "ext-gd": "*",
+        "ext-zip": "*",
+        "phpmailer/phpmailer": "^6.6",
+        "dompdf/dompdf": "^2.0",
+        "phpoffice/phpspreadsheet": "^1.24",
+        "intervention/image": "^2.7",
+        "league/csv": "^9.8",
+        "monolog/monolog": "^2.8",
+        "firebase/jwt": "^6.3",
+        "twilio/sdk": "^6.44",
+        "razorpay/razorpay": "^2.8",
+        "stripe/stripe-php": "^8.5",
+        "vlucas/phpdotenv": "^5.4",
+        "ramsey/uuid": "^4.2",
+        "nesbot/carbon": "^2.62",
+        "guzzlehttp/guzzle": "^7.4",
+        "league/flysystem": "^3.2",
+        "symfony/console": "^5.4",
+        "symfony/process": "^5.4",
+        "predis/predis": "^2.0",
+        "league/oauth2-client": "^2.6"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5",
+        "mockery/mockery": "^1.4",
+        "fakerphp/faker": "^1.19",
+        "phpstan/phpstan": "^1.8",
+        "squizlabs/php_codesniffer": "^3.7",
+        "friendsofphp/php-cs-fixer": "^3.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Core\\": "core/",
+            "Database\\": "database/"
+        },
+        "files": [
+            "core/helpers/functions.php",
+            "core/helpers/date_helper.php",
+            "core/helpers/string_helper.php",
+            "core/helpers/security_helper.php",
+            "core/helpers/file_helper.php",
+            "core/helpers/url_helper.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-update-cmd": [
+            "@php scripts/deployment/database_migrate.php"
+        ],
+        "test": "phpunit",
+        "test-coverage": "phpunit --coverage-html coverage",
+        "analyse": "phpstan analyse",
+        "cs-check": "phpcs",
+        "cs-fix": "phpcbf",
+        "php-cs-fixer": "php-cs-fixer fix",
+        "serve": "@php -S localhost:8000 -t public",
+        "migrate": "@php scripts/deployment/database_migrate.php",
+        "seed": "@php scripts/deployment/database_seed.php",
+        "backup": "@php scripts/maintenance/backup_database.php",
+        "clear-cache": "@php scripts/maintenance/clear_cache.php",
+        "clear-logs": "@php scripts/maintenance/cleanup_logs.php"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "extra": {
+        "branch-alias": {
+            "dev-main": "1.0-dev"
+        }
+    }
+}
